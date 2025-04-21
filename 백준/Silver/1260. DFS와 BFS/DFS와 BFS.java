@@ -36,7 +36,7 @@ public class Main {
         System.out.print(v + " ");
         visited[v] = true;
 
-        for (int i = 1; i < n + 1; i++) {
+        for (int i = 1; i <= n ; i++) {
             if (arr[v][i] == 1 && !visited[i]) {
                 dfs(i);
             }
