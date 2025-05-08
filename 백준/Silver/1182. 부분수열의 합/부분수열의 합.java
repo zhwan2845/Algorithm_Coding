@@ -1,10 +1,10 @@
 import java.util.Scanner;
 
 public class Main {
-    static int n, s;
-    static int[] basket;
+    static int n;
+    static int s;
+    static int ans = 0;
     static int[] arr;
-    static int count = 0;
     
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -12,36 +12,28 @@ public class Main {
         s = sc.nextInt();
 
         arr = new int[n];
+
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
 
-        basket = new int[n];
+        func(0, 0);
 
-        for (int i = 1; i <= n; i++) {
-            backtracking(0, 0, i);
-        }
+        if (s == 0) ans--;
 
-        System.out.println(count);
+        System.out.println(ans);
         sc.close();
     }
 
-    static void backtracking(int start, int depth, int size) {
-        if (depth == size) {
-            int sum = 0;
-            for (int i = 0; i < size; i++) {
-                sum += basket[i];
-            }
-
+    static void func(int sum, int v) {
+        if (v == n) {
             if (sum == s) {
-                count++;
+                ans++;
             }
             return;
         }
 
-        for (int i = start; i < n; i++) {
-            basket[depth] = arr[i];
-            backtracking(i + 1, depth + 1, size);
-        }
+        func(sum + arr[v], v + 1);
+        func(sum, v + 1);
     }
 } 
